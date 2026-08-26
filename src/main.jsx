@@ -3,11 +3,14 @@ import system from "./theme";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
 		<ChakraProvider value={system}>
-			<App />
+			<ProtectedRoute>
+				<App />
+			</ProtectedRoute>
 		</ChakraProvider>
 	</StrictMode>,
 );
