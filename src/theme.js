@@ -1,18 +1,26 @@
-import { extendTheme } from "@chakra-ui/react";
+import { ChakraProvider, createSystem, defaultConfig, defineConfig } from "@chakra-ui/react";
 
-const theme = extendTheme({
-	colors: {
-		status: {
-			onTime: "#38A169", // green
-			late: "#DD6B20", // orange
-			absent: "#E53E3E", // red
-			excused: "#718096", // gray
+const config = defineConfig({
+	theme: {
+		tokens: {
+			colors: {
+				red: { value: "#E53E3E" },
+				orange: { value: "#DD6B20" },
+				green: { value: "#38A169" },
+				gray: { value: "#718096" },
+			},
 		},
-	},
-	config: {
-		initialColorMode: "light",
-		useSystemColorMode: false, // don't let this drift into dark mode work — that's cut, remember
+		semanticTokens: {
+			colors: {
+                absent: { value: "{colors.red}" },
+                late: { value: "{colors.orange}" },
+                onTime: { value: "{colors.green}" },
+                excused: { value: "{colors.gray}" },
+			},
+		},
 	},
 });
 
-export default theme;
+const system = createSystem(defaultConfig, config)
+
+export default system
