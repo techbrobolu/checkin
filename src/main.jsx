@@ -1,16 +1,16 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import system from "./theme";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App.jsx";
-import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import "@radix-ui/themes/styles.css";
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+
+const client = new QueryClient()
 
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
-		<ChakraProvider value={system}>
-			<ProtectedRoute>
-				<App />
-			</ProtectedRoute>
-		</ChakraProvider>
+		<QueryClientProvider client={client}>
+			<Router></Router>
+		</QueryClientProvider>
 	</StrictMode>,
 );
